@@ -1,11 +1,55 @@
 <!DOCTYPE html>
+<html lang="en">
 <head>
-<link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign In</title>
 </head>
-<body><div class="card-container"><div class="card">
- <h1>Email:<input placeholder="Enter Your Email"></h1>
- <h1>password:<input placeholder="Enter Your Password"></h1>
-<a href="welcome.html"><button><strong><h3>submit</h3></strong></button><a>
-<a href="create new account.html"><button><strong><h3>Create An Account</h3></strong></button></a>
-</div></div>
+<body>
+    <h1>Sign In to Your Account</h1>
+    <br>
+    <form action="" id="loginform">
+        <label for="email">Email:</label>
+        <input type="email" name="email" id="email" required>
+        <br><br>
+        <label for="password">Password:</label>
+        <input type="password" name="password" id="password">
+        <br><br>
+        <button type="submit">Sign In</button>
+    </form>
+    <p id="output"></p>
+    <script>
+        const form = document.getElementById("loginform");
+
+        form.addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const email = document.getElementById("email").value;
+            const password = document.getElementById("password").value;
+
+            const data = `Email: ${email}, Password: ${password}`
+
+            fetch("http://localhost:3000/sign-in", {
+                method : "POST",
+                headers : {
+                    "Content-Type" : "application/json"
+                },
+                body : JSON.stringify({data : data})
+            })
+            .then(response => response.json())
+            .then(result => {
+                if (result.userExists) {
+                    window.location.href = "welcome.html"
+                }
+                else {
+                    document.getElementById("output").innerHTML=
+                    "No such user exists! <a href= 'create new account.html'> Click here to create an account </a>"
+                }
+            })
+            .catch((err) => {
+                console.error("Error Occured:", err);
+            })
+        });
+    </script>
 </body>
+</html>

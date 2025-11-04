@@ -1,12 +1,70 @@
 <!DOCTYPE html>
+<html>
 <head>
-<link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <title>createAc</title>
 </head>
-<body><div class="card-container"><div class="card">
- <h1>Name:<input placeholder="Enter Your Name"></h1>
- <h1>Email:<input placeholder="Enter Your Email"></h1>
- <h1>password:<input placeholder="Enter Your Password"></h1>
- <h1>Date Of Birth:<input placeholder="DD/MM/YYYY"></h1>
-</strong></button><button><strong><h3>Create An Account</h3></strong></button>
-</div></div>
+<body>
+  <div class="card-container">
+    <div class="card">
+      <form id="loginform">
+        <h1>Name:
+          <input id="name" placeholder="Enter Your Name" type="text">
+        </h1>
+        <h1>Email:
+          <input id="email" placeholder="Enter Your Email" type="email">
+        </h1>
+        <h1>Password:
+          <input id="password" placeholder="Enter Your Password" type="password">
+        </h1>
+        <h1>Date Of Birth:
+          <input id="dob" placeholder="DD/MM/YYYY" type="text">
+        </h1>
+        <button type="submit"><strong><h3>Create An Account</h3></strong></button>
+      </form>
+
+      <div id="output"></div>
+    </div>
+  </div>
+
+  <script>
+    const form = document.getElementById("loginform");
+
+    form.addEventListener("submit", function(event){
+        event.preventDefault();
+
+        const name = document.getElementById("name").value;
+        const email = document.getElementById("email").value;
+        const password = document.getElementById("password").value;
+        const dob = document.getElementById("dob").value;
+
+        console.log(name);
+        console.log(email);
+        console.log(password);
+        console.log(dob);
+
+        const data = { name: name, email: email, password: password, dob: dob };
+
+        fetch("http://localhost:3000/create-account", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(data)
+        })
+        .then(response => response.json())
+        .then(result => {
+            console.log("Success:", result.message);
+            if (result.message) {
+                window.location.href = "login.html";
+            }
+        })
+        .catch((err) => {
+            console.error("Error Occurred:", err);
+        });
+    });
+  </script>
 </body>
+</html>

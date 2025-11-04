@@ -1,0 +1,25 @@
+{
+  "name": "email-user-and-database",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MuhammadHamzaAsif1/Email-User-and-Database.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MuhammadHamzaAsif1/Email-User-and-Database/issues"
+  },
+  "homepage": "https://github.com/MuhammadHamzaAsif1/Email-User-and-Database#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^5.1.0"
+  }
+}
